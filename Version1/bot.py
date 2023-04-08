@@ -16,8 +16,9 @@ bot = telebot.TeleBot(apitoken)
 
 # переменные
 # если че то это относительный путь*****
-products = pd.read_csv("Version1\CsvFile\products.csv")
-print(products)
+file_product_csv = 'Version1\CsvFile\products.csv'
+products = pd.read_csv(file_product_csv)
+# print(products) # затестим нашу 
 
 
 
