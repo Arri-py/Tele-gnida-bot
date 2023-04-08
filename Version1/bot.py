@@ -16,8 +16,7 @@ bot = telebot.TeleBot(apitoken)
 
 # переменные
 # если че то это относительный путь*****
-file = 'C:\Users\drdov\Desktop\Tele-gnida-bot\Vers1\products.csv' 
-products = pd.read_csv(file)
+products = pd.read_csv("products.csv")
 print(products)
 
 
