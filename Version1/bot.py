@@ -8,26 +8,41 @@ from telebot import types
 apitoken = '6053060605:AAGvOKVTvn3jELZKKrtiNkNYSykIDSOm_G8' # запишем наш токен в переменную 
 bot = telebot.TeleBot(apitoken)
 
+# Создаем базу данных с товарами b историей в файле Record.py\
 
-# Создаем базу данных с товарами
-
-
-
-
-# переменные
+# получаем наши csv
 # если че то это относительный путь*****
 file_product_csv = 'Version1\CsvFile\products.csv'
 products = pd.read_csv(file_product_csv)
-# print(products) # затестим нашу 
-
+# print(products) # затестим 
+file_history_csv = 'Version1\CsvFile\history.csv'
+history = pd.read_csv(file_history_csv)
+# print(history)
 
 
 @bot.message_handler(commands=['start']) # отслеживает комманду start
 def start(message):
-    # тут комманды при вызове комманды start
-    bot.send_message(message.chat.id, f'Привет {message.from_user.first_name}')
-    bot.send_message(message.chat.id, 'Я торговый telegram-бот')
-    bot.send_message(message.chat.id, 'Вам необходимо зарегистрироваться для оформления заказа иначе но будет невозможен (/reg)')
+    # для начала нам понять заходил пользователь ранее или нет 
+    if (message.from_user.id) in history['User_id']:
+        bot.send_message(message.chat.id, 'Привет')
+        bot.send_message(message.chat.id, 'Как хорошо что ты вернулся')
+    else:
+        bot.send_message(message.chat.id, f'Привет {message.from_user.first_name}')
+        bot.send_message(message.chat.id, 'Я торговый telegram-бот')
+        bot.send_message(message.chat.id, 'Вам необходимо зарегистрироваться для оформления заказа иначе но будет невозможен (/reg)')
+        new = pd.DataFrame([{'User_id': message.from_user.id,
+                             'User_first_name': message.from_user.username,
+                             'Phone': None,
+                             'Order_amount': None,
+                             'Address': None}])
+        new.to_csv(file_history_csv, mode='a', index=False, header=False)
+
+
+# message.from_user.id
+# message.from_user.first_name
+# message.from_user.last_name
+# message.from_user.username
+
 
 
 
@@ -47,6 +62,7 @@ def regmobile(message):
         # int(mobile)
         if len(mobile) == 11:
             # bot.send_message(message.chat.id, f'Ваш номер телефона {mobile}')
+
             bot.send_message(message.chat.id, 'Поздравляю с успешной регистрацией)')
             bot.send_message(message.chat.id, 'Ознакомьтесь с товарами по скидке (/discounts)')
 
