@@ -1,0 +1,133 @@
+1) приветствие + save name 
+
+2) авторизация Phone + ДА НЕТ 
+
+3)      1c
+        2c
+        3c
+        -end        3\1c
+                    3\2c
+
+
+4) ? 1->
+     2->
+     3->
+
+5) The end
+
+тз
+1 комманда start приветствие с пользователем + тип авторизация(тут можно воспользоваться именем пользователя из tg)     
+авторизация телефона(можно использовать id) запишем в переменную мб получится достать с помощью телеграмма              
+1 предложить товары по скидке
+2 предложить пользователю выбрать товыры товыры которые имеются в наличии 
+если он ничего не найдет то предложить под заказ
+показать корзину (добавить кнопочку с крзиной мб будет глобальная переменная в который будет это все храниться)
+процедура покупки\заказа
+перевод денег
+3 если пользователю вообще ничего не понравится то вовсе попращаться после пары вопросов 
+4.1 пускай он оценит сервис
+4.2 если поставит оценку ниже 5 из 10 то надо спросить почему 
+4.3 попращаться если пользователь ничего не купил  попращаться иначе сказать 
+когда оформят его заказ + "спасибо за покупку мы ждем вас снова"
+
+
+
+
+# товары
+
+# product = pd.DataFrame([{
+#         'article_number': '0tovar',
+#         'title': 'Шариковая ручка "PARKER"',
+#         'quantity': 100,
+#         'price': 75480,
+#         'discounts': 20,
+#         'url_tovar': 'https://www.parkerrussia.ru/pens/duofold/PR20B-MLT53/'},
+
+#     {
+#         'article_number': '1tovar',
+#         'title': 'Перьевая ручка "PARKER"',
+#         'quantity': 100,
+#         'price': 200000,
+#         'discounts': 0,
+#         'url_tovar': 'https://pen-parker.ru/fountains/parker-duofold-2123549/'},
+    
+#     {
+#         'article_number': '2tovar',
+#         'title': 'Ручка школьника',
+#         'quantity': 100,
+#         'price': 70,
+#         'discounts': 0,
+#         'url_tovar': 'https://www.ozon.ru/product/ruchka-lego-918586094/?asb2=ZiB0lHfB6UzaxePKIo6Jo77phqNBi8Dbiuz5Q-w8rCcRCTpZUmss_gDvoh0BuMZv&avtc=1&avte=2&avts=1680357851&keywords=ручки+шариковые&sh=iNe1bzckrQ'},
+
+#     {
+#         'article_number': '3tovar',
+#         'title': 'Карандаш механический "Bruno Visconti"',
+#         'quantity': 100,
+#         'price': 52,
+#         'discounts': 0,
+#         'url_tovar': 'https://leonardo.ru/ishop/group_67541861234/'},
+        
+#     {
+#         'article_number': '4tovar',
+#         'title': 'Ластик для чернографитных карандашей "KOH-I-NOOR Hardtmuth"',
+#         'quantity': 100,
+#         'price': 117,
+#         'discounts': 10,
+#         'url_tovar': 'https://leonardo.ru/ishop/good_5040500583/'},
+
+#     {
+#         'article_number': '5tovar',
+#         'title': 'Карандаш корректирующий "Edding"',
+#         'quantity': 100,
+#         'price': 260,
+#         'discounts': 0,
+#         'url_tovar': 'https://leonardo.ru/ishop/good_31744315742/'},
+    
+#     {
+#         'article_number': '6tovar',
+#         'title': 'Клей-карандаш "PRYM"',
+#         'quantity': 375,
+#         'price': 84,
+#         'discounts': 0,
+#         'url_tovar': 'https://leonardo.ru/ishop/good_209767311/'},
+    
+#     {
+#         'article_number': '7tovar',
+#         'title': 'Маркер перманентный "Pentel"',
+#         'quantity': 840,
+#         'price': 38,
+#         'discounts': 0,
+#         'url_tovar': 'https://leonardo.ru/ishop/good_73277167744/'},
+
+#     {
+#         'article_number': '8tovar',
+#         'title': 'Маркер акриловый "PEBEO"',
+#         'quantity': 100,
+#         'price': 275,
+#         'discounts':15,
+#         'url_tovar': 'https://leonardo.ru/ishop/group_35861226922/'},
+
+#     {
+#         'article_number': '9tovar',
+#         'title': 'Декоративная ручка "Sakura"',
+#         'quantity': 100,
+#         'price': 203,
+#         'discounts': 0,
+#         'url_tovar': 'https://leonardo.ru/ishop/good_21808617932/'},
+
+#     {
+#         'article_number': '10tovar',
+#         'title': 'Маркер лаковый "Edding"',
+#         'quantity': 100,
+#         'price': 622,
+#         'discounts': 50,
+#         'url_tovar': 'https://leonardo.ru/ishop/good_74180313104/'}])
+
+
+
+
+# проверка бдительности
+# product = pd.DataFrame(products)
+
+# product.to_csv('products.csv', index=False)
+
