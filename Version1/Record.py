@@ -96,18 +96,27 @@ products = {
 ## теперь их нужно закинуть в файлик
 
 products_df = pd.DataFrame(products)
-print(products_df)
 
 ## указываем относительный путь (у нас все csv будут в отдельной папочке😐)
 products_df.to_csv('Version1\CsvFile\products.csv', index=False)
+## чекаем результат
+prod = pd.read_csv('Version1\CsvFile\products.csv',sep=',')
+print(prod)
 
 ## тут уже история покупок
 history = pd.DataFrame([{'Id': 0,
                       'User_id': 'test', 
                       'User_first_name': 'test', 
                       'Phone': 0, 
-                      'order amount': 0}])
+                      'Order amount': 0,
+                      'Address': 'test',}])
 
 ## указываем относительный путь (у нас все csv будут в отдельной папочке😐)
 ## чтобы меньше писать кода мы укажем 'index=True' оно тип само будет индексироваться
 history.to_csv('Version1\CsvFile\history.csv', index=True)
+
+## чекаем результат
+his = pd.read_csv('Version1\CsvFile\history.csv', sep=',')
+print(his)
+
+
