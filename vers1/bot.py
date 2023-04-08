@@ -4,14 +4,19 @@ import numpy as np
 from telebot import types
 
 
-
 # подключение токена бота
 apitoken = '6053060605:AAGvOKVTvn3jELZKKrtiNkNYSykIDSOm_G8' # запишем наш токен в переменную 
 bot = telebot.TeleBot(apitoken)
 
+
+# Создаем базу данных с товарами
+
+
+
+
 # переменные
 # если че то это относительный путь*****
-file = "System programming\TeleBot\products.csv" 
+file = 'C:\Users\drdov\Desktop\Tele-gnida-bot\Vers1\products.csv' 
 products = pd.read_csv(file)
 print(products)
 

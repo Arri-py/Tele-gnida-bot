@@ -1,138 +1,99 @@
-# import pandas as pd
+import pandas as pd
 
-# import csv
+# создаем базу данных с товарами
 
-# with open('products.csv', 'w') as file:
-#     reader = csv.reader(file, delimiter=',')
-#     for row in reader:
-#         print(row)
+products = {
+    '0tovar':{
+        'article_number': '0tovar',
+        'title': 'Шариковая ручка "PARKER"',
+        'quantity': 100,
+        'price': 75480,
+        'discounts': 20,
+        'url_tovar': 'https://www.parkerrussia.ru/pens/duofold/PR20B-MLT53/'},
 
+    '1tovar':{
+        'article_number': '1tovar',
+        'title': 'Перьевая ручка "PARKER"',
+        'quantity': 100,
+        'price': '200000',
+        'discounts': 0,
+        'url_tovar': 'https://pen-parker.ru/fountains/parker-duofold-2123549/'},
+    
+    '2tovar':{
+        'article_number': '2tovar',
+        'title': 'Ручка школьника',
+        'quantity': 100,
+        'price': '70',
+        'discounts': 0,
+        'url_tovar': 'https://www.ozon.ru/product/ruchka-lego-918586094/?asb2=ZiB0lHfB6UzaxePKIo6Jo77phqNBi8Dbiuz5Q-w8rCcRCTpZUmss_gDvoh0BuMZv&avtc=1&avte=2&avts=1680357851&keywords=ручки+шариковые&sh=iNe1bzckrQ'},
 
-# отслеживание текстовых сообщений
-# @bot.message_handler(content_types=['text'])
-
-# отслеживание commands
-# def command(message):
-#     if message.text == '/start':
-#         bot.send_message(message.chat.id, f'Привет {message.from_user.first_name}')
-#         bot.send_message(message.chat.id, 'Привет желаете зарегистрироваться?')
-#         registrat(message)
-
-
-
-# def registrat(message):
-#     if message.text == 'да' or message.text == 'Да':
-#         bot.send_message(message.chat.id, 'werwet')
-
-
-
-# mess_text = mess_text(message)
-
-
-
-# def registr(message):
-#     bot.send_message(message.chat.id, 'Желаете зарегистрироваться?')
-#     if mess_text == 'да':
-#         bot.send_message(message.chat.id, 'да?')
+    '3tovar':{
+        'article_number': '3tovar',
+        'title': 'Карандаш механический "Bruno Visconti"',
+        'quantity': 100,
+        'price': '52',
+        'discounts': 0,
+        'url_tovar': 'https://leonardo.ru/ishop/group_67541861234/'},
         
+    '4tovar':{
+        'article_number': '4tovar',
+        'title': 'Ластик для чернографитных карандашей "KOH-I-NOOR Hardtmuth"',
+        'quantity': 100,
+        'price': '117',
+        'discounts': 10,
+        'url_tovar': 'https://leonardo.ru/ishop/good_5040500583/'},
 
-
-# def command(message):
-#     if message.text == '/start':
-#         bot.send_message(message.chat.id, f'Привет {message.from_user.first_name}') 
-         
-
-
-# обычные текстовые сообщения
-# def text(message):
-#     if message.text == 'Привет' or message.text == 'привет':
-#         bot.send_message(message.chat.id, ':)')
-
+    '5tovar':{
+        'article_number': '5tovar',
+        'title': 'Карандаш корректирующий "Edding"',
+        'quantity': 100,
+        'price': '260',
+        'discounts': 0,
+        'url_tovar': 'https://leonardo.ru/ishop/good_31744315742/'},
     
-    # bot.send_message(message.chat.id, 'Желаете зарегистрироваться?')
-    # if message.text == 'Да' or message.text == 'да':
-    #     bot.send_message(message.chat.id, 'хорошо')
-
+    '6tovar':{
+        'article_number': '6tovar',
+        'title': 'Клей-карандаш "PRYM"',
+        'quantity': 375,
+        'price': '84',
+        'discounts': 0,
+        'url_tovar': 'https://leonardo.ru/ishop/good_209767311/'},
     
+    '7tovar':{
+        'article_number': '7tovar',
+        'title': 'Маркер перманентный "Pentel"',
+        'quantity': 840,
+        'price': '38',
+        'discounts': 0,
+        'url_tovar': 'https://leonardo.ru/ishop/good_73277167744/'},
 
-# длы постоянной работы бота 
+    '8tovar':{
+        'article_number': '8tovar',
+        'title': 'Маркер акриловый "PEBEO"',
+        'quantity': 100,
+        'price': '275',
+        'discounts':15,
+        'url_tovar': 'https://leonardo.ru/ishop/group_35861226922/'},
 
+    '9tovar':{
+        'article_number': '9tovar',
+        'title': 'Декоративная ручка "Sakura"',
+        'quantity': 100,
+        'price': '203',
+        'discounts': 0,
+        'url_tovar': 'https://leonardo.ru/ishop/good_21808617932/'},
 
+    '10tovar':{
+        'article_number': '10tovar',
+        'title': 'Маркер лаковый "Edding"',
+        'quantity': 100,
+        'price': '622',
+        'discounts': 50,
+        'url_tovar': 'https://leonardo.ru/ishop/good_74180313104/'}
+}
 
-# отслеживание комманд это те самые через '/'
-# @bot.message_handler(commands=['start', 'message', 'my_id'])
-# def start(message):
-
-#     if message.text == '/start':
-#         bot.send_message(message.chat.id, 'Привет')
-
-#     elif message.text == '/message':
-#         bot.send_message(message.chat.id, 'Держи всю информацию')
-#         bot.send_message(message.chat.id, message)
-    
-#     elif message.text == '/my_id':
-#         bot.send_message(message.chat.id, f'Твой ID: {message.from_user.id}')
-
-        
-
-# для отслеживания любых текстовых сообщений
-# @bot.message_handler(content_types=['text'])
-# def textmessage(message):
-    # ...
-    
-    # когда хотим взаимодействовать с ботом нам надо к нему обратиться
-    # в методе send мы может отправть что у годно (чекай автотаб)  
-    # пертвые 2 параметра обязательные 1: чат; 2: сам текст сообщения; 3: режим отправки сообщений  parse_mode='text' ('text' or 'html')
-    # mess = f'Привет, {message.from_user.first_name} {message.from_user.last_name}'
-    # bot.send_message(message.chat.id, mess)
-
-
-
-# это чтобы он на постоянке работал
-# bot.polling(none_stop=True, interval=0)
-
-
-
-# декоратор для получения текствовых сообщений
-# @bot.message_handler(content_types=['text', 'document', 'audio'])
-
-
-
-# def get_text_messages(message):
-#     if message.text == "Привет" or message.text == "привет":
-#         bot.send_message(message.from_user.id, "Привет, чем я могу тебе помочь?")
-
-#     elif message.text == "/help":
-#         bot.send_message(message.from_user.id, "Напиши привет")
-
-#     else:
-#         bot.send_message(message.from_user.id, "Я тебя не понимаю. Напиши /help.")
-
-
-
-# bot.polling(none_stop=True, interval=0)
-
-
-
-# bot=telebot.TeleBot(apitoken)
-# @bot.message_handler(commands=['start'])
-
-# def start_message(message):
-#     bot.send_message(message.chat.id,'Привет')
-
-
-
-# @bot.message_handler(commands=['button'])
-# def button_message(message):
-#     markup=types.ReplyKeyboardMarkup(resize_keyboard=True)
-#     item1=types.KeyboardButton("Кнопка")
-#     markup.add(item1)
-#     bot.send_message(message.chat.id,'Выберите что вам надо',reply_markup=markup)
-
-
-
-# @bot.message_handler(content_types='text')
-# def message_reply(message):
-#     if message.text=="Кнопка":
-#         bot.send_message(message.chat.id,"https://habr.com/ru/users/lubaznatel/")
-# bot.infinity_polling()
+#  и так мы созади 10 товаров 
+# теперь их нужно закинуть в файлик
+# 
+products_df = pd.DataFrame(products)
+products_df
