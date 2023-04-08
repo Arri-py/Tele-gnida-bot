@@ -23,7 +23,7 @@ history = pd.read_csv(file_history_csv)
 @bot.message_handler(commands=['start']) # отслеживает комманду start
 def start(message):
     # для начала нам понять заходил пользователь ранее или нет 
-    if (message.from_user.id) in history['User_id']:
+    if history.count(message.from_user.id):
         bot.send_message(message.chat.id, 'Привет')
         bot.send_message(message.chat.id, 'Как хорошо что ты вернулся')
     else:
