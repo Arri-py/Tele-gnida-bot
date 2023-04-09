@@ -40,12 +40,18 @@ def start(message):
             new.to_csv(file_history_csv, mode='a', index=False, header=False)
     q()
 
+
 # message.from_user.id
 # message.from_user.first_name
 # message.from_user.last_name
 # message.from_user.username
 
 # комманда reg
+# как она работает 
+# для начала нам надо понять есть ли пользователь в нашей бд 
+# если его нет то сразу же кидаем его на регистрацию номера телефона 
+# если он есть то чекаем есть ли его номер телефона если нет то тоже кидаем на регистрацию телефона 
+# если пользователь и номер его телефонаесть то 
 @bot.message_handler(commands=['reg']) # reg тип регистрация
 def start(message):
     def q():
