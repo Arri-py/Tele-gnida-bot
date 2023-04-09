@@ -1,6 +1,8 @@
 import telebot
 import pandas as pd
 import numpy as np
+from telebot import types
+
 
 # подключение токена бота
 apitoken = '6053060605:AAGvOKVTvn3jELZKKrtiNkNYSykIDSOm_G8' # запишем наш токен в переменную 
@@ -14,90 +16,65 @@ file_product_csv = 'Version1\CsvFile\products.csv'
 products = pd.read_csv(file_product_csv)
 # print(products) # затестим 
 file_history_csv = 'Version1\CsvFile\history.csv'
+history = pd.read_csv(file_history_csv)
 # print(history)
 
 
 @bot.message_handler(commands=['start']) # отслеживает комманду start
 def start(message):
     # для начала нам понять заходил пользователь ранее или нет 
-    # функция q это лучшее авторское решение 
-    def q():
-        history = pd.read_csv(file_history_csv)
-        user_id = history['User_id'].tolist()
-        if message.from_user.id in user_id:
-            bot.send_message(message.chat.id, 'Привет')
-            bot.send_message(message.chat.id, 'Как хорошо что ты вернулся')
+    if history.count(message.from_user.id):
+        bot.send_message(message.chat.id, 'Привет')
+        bot.send_message(message.chat.id, 'Как хорошо что ты вернулся')
+    else:
+        bot.send_message(message.chat.id, f'Привет {message.from_user.first_name}')
+        bot.send_message(message.chat.id, 'Я торговый telegram-бот')
+        bot.send_message(message.chat.id, 'Вам необходимо зарегистрироваться для оформления заказа иначе но будет невозможен (/reg)')
+        new = pd.DataFrame([{'User_id': message.from_user.id,
+                             'User_first_name': message.from_user.username,
+                             'Phone': None,
+                             'Order_amount': None,
+                             'Address': None}])
+        new.to_csv(file_history_csv, mode='a', index=False, header=False)
 
-        else:
-            bot.send_message(message.chat.id, f'Привет {message.from_user.first_name}')
-            bot.send_message(message.chat.id, 'Я торговый telegram-бот')
-            bot.send_message(message.chat.id, 'Вам необходимо зарегистрироваться для оформления заказа иначе но будет невозможен (/reg)')
-            new = pd.DataFrame([{'User_id': message.from_user.id,
-                                'User_first_name': message.from_user.username,
-                                'Phone': None,
-                                'Order_amount': None,
-                                'Address': None}])
-            new.to_csv(file_history_csv, mode='a', index=False, header=False)
-    q()
 
 # message.from_user.id
 # message.from_user.first_name
 # message.from_user.last_name
 # message.from_user.username
 
-# комманда reg
+
+
+
 @bot.message_handler(commands=['reg']) # reg тип регистрация
 def start(message):
-    def q():
-        history = pd.read_csv(file_history_csv)
-        user_id = history['User_id'].tolist()
-
-        if message.from_user.id in user_id:
-            user_id_bot = str(message.from_user.id)
-            user_Phone = history[history.iloc[user_id_bot]],['Phone'].tolist()
-            if user_Phone.len() > 11: # сотрим есть ли 
-                bot.send_message(message.chat.id, 'Приступим к повторной регистрации')    
-                bot.register_next_step_handler(message, regmobile)
-
-            else:
-                bot.send_message(message.chat.id, 'Ваш номер телефона не зарегистрирован')
-                bot.send_message(message.chat.id, 'Приступим к регистрации вашего телефона')
-
-        else:   
-            bot.send_message(message.chat.id, 'Приступим к регистрации')
-            bot.send_message(message.chat.id, 'Введите номер телефона')
-            bot.register_next_step_handler(message, regmobile) 
-        # bot.send_message(message.chat.id, f'Ваш номер телефона {mobile}')
-    q()
-
-# функция повторной регистации пользователя 
-def povtor_regregmobile(message):
-    pass
+    bot.send_message(message.chat.id, 'Приступим к регистрации')
+    bot.send_message(message.chat.id, 'Введите номер телефона')
+    bot.register_next_step_handler(message, regmobile) 
+    # bot.send_message(message.chat.id, f'Ваш номер телефона {mobile}')
 
 # функция регистрации номера телефона
-def regmobile(message): # вот это: regmobile для вот этого: register_next_step_handler
-    # опять применем лучшее авторкое решение
-    def q():
-        mobile = message.text
-        is_num = mobile.isnumeric()
-        if is_num == True:
-            # int(mobile)
-            if len(mobile) == 11:
-                # bot.send_message(message.chat.id, f'Ваш номер телефона {mobile}')
-    
-                bot.send_message(message.chat.id, 'Поздравляю с успешной регистрацией)')
-                bot.send_message(message.chat.id, 'Ознакомьтесь с товарами по скидке (/discounts)')
-    
-            else:
-                bot.send_message(message.chat.id, 'Вы ввели не верный номер телефона')
-                bot.send_message(message.chat.id, 'Повторите попытку')
-                bot.register_next_step_handler(message, regmobile)
-    
+def regmobile(message):
+    # global mobile она (тип глобальная)
+    mobile = message.text
+    is_num = mobile.isnumeric()
+    if is_num == True:
+        # int(mobile)
+        if len(mobile) == 11:
+            # bot.send_message(message.chat.id, f'Ваш номер телефона {mobile}')
+
+            bot.send_message(message.chat.id, 'Поздравляю с успешной регистрацией)')
+            bot.send_message(message.chat.id, 'Ознакомьтесь с товарами по скидке (/discounts)')
+
         else:
             bot.send_message(message.chat.id, 'Вы ввели не верный номер телефона')
             bot.send_message(message.chat.id, 'Повторите попытку')
-            bot.register_next_step_handler(message, regmobile) 
-    q()
+            bot.register_next_step_handler(message, regmobile)
+
+    else:
+        bot.send_message(message.chat.id, 'Вы ввели не верный номер телефона')
+        bot.send_message(message.chat.id, 'Повторите попытку')
+        bot.register_next_step_handler(message, regmobile) 
 
 
 
