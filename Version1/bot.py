@@ -1,6 +1,5 @@
 import telebot
 import pandas as pd
-import numpy as np
 
 # подключение токена бота
 apitoken = '6053060605:AAGvOKVTvn3jELZKKrtiNkNYSykIDSOm_G8' # запишем наш токен в переменную 
