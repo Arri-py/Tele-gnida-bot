@@ -17,6 +17,101 @@ file_history_csv = 'Version1\CsvFile\history.csv'
 # print(history)
 
 
+
+
+products = {
+    '0tovar':{
+        'article_number': '0tovar',
+        'title': 'Шариковая ручка "PARKER"',
+        'quantity': 100,
+        'price': 75480,
+        'discounts': 20,
+        'url_tovar': 'https://www.parkerrussia.ru/pens/duofold/PR20B-MLT53/'},
+
+    '1tovar':{
+        'article_number': '1tovar',
+        'title': 'Перьевая ручка "PARKER"',
+        'quantity': 100,
+        'price': '200000',
+        'discounts': 0,
+        'url_tovar': 'https://pen-parker.ru/fountains/parker-duofold-2123549/'},
+    
+    '2tovar':{
+        'article_number': '2tovar',
+        'title': 'Ручка школьника',
+        'quantity': 100,
+        'price': '70',
+        'discounts': 0,
+        'url_tovar': 'https://www.ozon.ru/product/ruchka-lego-918586094/?asb2=ZiB0lHfB6UzaxePKIo6Jo77phqNBi8Dbiuz5Q-w8rCcRCTpZUmss_gDvoh0BuMZv&avtc=1&avte=2&avts=1680357851&keywords=ручки+шариковые&sh=iNe1bzckrQ'},
+
+    '3tovar':{
+        'article_number': '3tovar',
+        'title': 'Карандаш механический "Bruno Visconti"',
+        'quantity': 100,
+        'price': '52',
+        'discounts': 0,
+        'url_tovar': 'https://leonardo.ru/ishop/group_67541861234/'},
+        
+    '4tovar':{
+        'article_number': '4tovar',
+        'title': 'Ластик для чернографитных карандашей "KOH-I-NOOR Hardtmuth"',
+        'quantity': 100,
+        'price': '117',
+        'discounts': 10,
+        'url_tovar': 'https://leonardo.ru/ishop/good_5040500583/'},
+
+    '5tovar':{
+        'article_number': '5tovar',
+        'title': 'Карандаш корректирующий "Edding"',
+        'quantity': 100,
+        'price': '260',
+        'discounts': 0,
+        'url_tovar': 'https://leonardo.ru/ishop/good_31744315742/'},
+    
+    '6tovar':{
+        'article_number': '6tovar',
+        'title': 'Клей-карандаш "PRYM"',
+        'quantity': 375,
+        'price': '84',
+        'discounts': 0,
+        'url_tovar': 'https://leonardo.ru/ishop/good_209767311/'},
+    
+    '7tovar':{
+        'article_number': '7tovar',
+        'title': 'Маркер перманентный "Pentel"',
+        'quantity': 840,
+        'price': '38',
+        'discounts': 0,
+        'url_tovar': 'https://leonardo.ru/ishop/good_73277167744/'},
+
+    '8tovar':{
+        'article_number': '8tovar',
+        'title': 'Маркер акриловый "PEBEO"',
+        'quantity': 100,
+        'price': '275',
+        'discounts':15,
+        'url_tovar': 'https://leonardo.ru/ishop/group_35861226922/'},
+
+    '9tovar':{
+        'article_number': '9tovar',
+        'title': 'Декоративная ручка "Sakura"',
+        'quantity': 100,
+        'price': '203',
+        'discounts': 0,
+        'url_tovar': 'https://leonardo.ru/ishop/good_21808617932/'},
+
+    '10tovar':{
+        'article_number': '10tovar',
+        'title': 'Маркер лаковый "Edding"',
+        'quantity': 100,
+        'price': '622',
+        'discounts': 50,
+        'url_tovar': 'https://leonardo.ru/ishop/good_74180313104/'}
+}
+
+
+
+
 @bot.message_handler(commands=['start']) # отслеживает комманду start
 def start(message):
     # для начала нам понять заходил пользователь ранее или нет 
@@ -45,59 +140,93 @@ def start(message):
 # message.from_user.last_name
 # message.from_user.username
 
-# комманда reg
+
+
+
 @bot.message_handler(commands=['reg']) # reg тип регистрация
 def start(message):
-    def q():
-        history = pd.read_csv(file_history_csv)
-        user_id = history['User_id'].tolist()
-
-        if message.from_user.id in user_id:
-            user_id_bot = str(message.from_user.id)
-            user_Phone = history[history.iloc[user_id_bot]],['Phone'].tolist()
-            if user_Phone.len() > 11: # сотрим есть ли 
-                bot.send_message(message.chat.id, 'Приступим к повторной регистрации')    
-                bot.register_next_step_handler(message, regmobile)
-
-            else:
-                bot.send_message(message.chat.id, 'Ваш номер телефона не зарегистрирован')
-                bot.send_message(message.chat.id, 'Приступим к регистрации вашего телефона')
-
-        else:   
-            bot.send_message(message.chat.id, 'Приступим к регистрации')
-            bot.send_message(message.chat.id, 'Введите номер телефона')
-            bot.register_next_step_handler(message, regmobile) 
-        # bot.send_message(message.chat.id, f'Ваш номер телефона {mobile}')
-    q()
-
-# функция повторной регистации пользователя 
-def povtor_regregmobile(message):
-    pass
+    bot.send_message(message.chat.id, 'Приступим к регистрации')
+    bot.send_message(message.chat.id, 'Введите номер телефона')
+    bot.register_next_step_handler(message, regmobile) 
+    # bot.send_message(message.chat.id, f'Ваш номер телефона {mobile}')
 
 # функция регистрации номера телефона
-def regmobile(message): # вот это: regmobile для вот этого: register_next_step_handler
-    # опять применем лучшее авторкое решение
-    def q():
-        mobile = message.text
-        is_num = mobile.isnumeric()
-        if is_num == True:
-            # int(mobile)
-            if len(mobile) == 11:
-                # bot.send_message(message.chat.id, f'Ваш номер телефона {mobile}')
-    
-                bot.send_message(message.chat.id, 'Поздравляю с успешной регистрацией)')
-                bot.send_message(message.chat.id, 'Ознакомьтесь с товарами по скидке (/discounts)')
-    
-            else:
-                bot.send_message(message.chat.id, 'Вы ввели не верный номер телефона')
-                bot.send_message(message.chat.id, 'Повторите попытку')
-                bot.register_next_step_handler(message, regmobile)
-    
+def regmobile(message):
+    # global mobile она (тип глобальная)
+    mobile = message.text
+    is_num = mobile.isnumeric()
+    if is_num == True:
+        # int(mobile)
+        if len(mobile) == 11:
+            # bot.send_message(message.chat.id, f'Ваш номер телефона {mobile}')
+            bot.send_message(message.chat.id, 'Поздравляю с успешной регистрацией)')
+            bot.send_message(message.chat.id, 'Ознакомьтесь с товарами по скидке (/discounts)')
+
         else:
             bot.send_message(message.chat.id, 'Вы ввели не верный номер телефона')
             bot.send_message(message.chat.id, 'Повторите попытку')
-            bot.register_next_step_handler(message, regmobile) 
-    q()
+            bot.register_next_step_handler(message, regmobile)
+
+    else:
+        bot.send_message(message.chat.id, 'Вы ввели не верный номер телефона')
+        bot.send_message(message.chat.id, 'Повторите попытку')
+        bot.register_next_step_handler(message, regmobile)
+
+
+"""оно не работет так как хотелось бы"""
+# # комманда reg
+# @bot.message_handler(commands=['reg']) # reg тип регистрация
+# def start(message):
+#     def q():
+#         history = pd.read_csv(file_history_csv)
+#         user_id = history['User_id'].tolist()
+
+#         if message.from_user.id in user_id:
+#             user_id_bot = str(message.from_user.id)
+#             user_Phone = history[history.iloc[user_id_bot]],['Phone'].tolist()
+#             if user_Phone.len() > 11: # сотрим есть ли 
+#                 bot.send_message(message.chat.id, 'Приступим к повторной регистрации')    
+#                 bot.register_next_step_handler(message, regmobile)
+
+#             else:
+#                 bot.send_message(message.chat.id, 'Ваш номер телефона не зарегистрирован')
+#                 bot.send_message(message.chat.id, 'Приступим к регистрации вашего телефона')
+
+#         else:   
+#             bot.send_message(message.chat.id, 'Приступим к регистрации')
+#             bot.send_message(message.chat.id, 'Введите номер телефона')
+#             bot.register_next_step_handler(message, regmobile) 
+#         # bot.send_message(message.chat.id, f'Ваш номер телефона {mobile}')
+#     q()
+
+# # функция повторной регистации пользователя 
+# def povtor_regregmobile(message):
+#     pass
+
+# # функция регистрации номера телефона
+# def regmobile(message): # вот это: regmobile для вот этого: register_next_step_handler
+#     # опять применем лучшее авторкое решение
+#     def q():
+#         mobile = message.text
+#         is_num = mobile.isnumeric()
+#         if is_num == True:
+#             # int(mobile)
+#             if len(mobile) == 11:
+#                 # bot.send_message(message.chat.id, f'Ваш номер телефона {mobile}')
+    
+#                 bot.send_message(message.chat.id, 'Поздравляю с успешной регистрацией)')
+#                 bot.send_message(message.chat.id, 'Ознакомьтесь с товарами по скидке (/discounts)')
+    
+#             else:
+#                 bot.send_message(message.chat.id, 'Вы ввели не верный номер телефона')
+#                 bot.send_message(message.chat.id, 'Повторите попытку')
+#                 bot.register_next_step_handler(message, regmobile)
+    
+#         else:
+#             bot.send_message(message.chat.id, 'Вы ввели не верный номер телефона')
+#             bot.send_message(message.chat.id, 'Повторите попытку')
+#             bot.register_next_step_handler(message, regmobile) 
+#     q()
 
 
 
