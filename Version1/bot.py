@@ -118,6 +118,7 @@ def start(message):
     def q():
         history = pd.read_csv(file_history_csv)
         user_id = history['User_id'].tolist()
+        
         if message.from_user.id in user_id:
             bot.send_message(message.chat.id, 'Привет')
             bot.send_message(message.chat.id, 'Как хорошо что ты вернулся')
