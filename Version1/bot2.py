@@ -11,7 +11,7 @@ file_product_csv = 'Version1\CsvFile\products.csv'
 file_history_csv = 'Version1\CsvFile\history.csv'
 
 products = pd.read_csv(file_product_csv)    # товары
-history = pd.read_csv(file_history_csv)     # история
+history = pd.read_csv(file_history_csv)     # историяz
 
 
 @bot.message_handler(commands=['start'])    # отслеживает комманду start
